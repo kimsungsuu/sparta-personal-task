@@ -18,7 +18,7 @@ public class PostController {
         this.postService = postService;
     }
     @PostMapping("/posts")
-    public ResponsePostDto createPost(@RequestBody RequestPostDto requestPostDto){
+    public ResponsePostDto savePost(@RequestBody RequestPostDto requestPostDto){
         Post post = new Post(requestPostDto);
 
         postService.save(post);
@@ -28,12 +28,23 @@ public class PostController {
         return responsePostDto;
     }
 
-
     @GetMapping("/posts")
-    public List<ResponsePostDto> getPost(){
-        List<ResponsePostDto> responseDto = postService.findAll().stream()
-                .map(ResponsePostDto::new).toList();
+    public List<ResponsePostDto> findAllPost(){
+        return postService.findAll();
+    }
 
-        return responseDto;
+    @GetMapping("/posts/{id}")
+    public ResponsePostDto viewPost(@PathVariable Long id){
+        return postService.findById(id);
+    }
+
+    @PatchMapping("/posts/{id}")
+    public ResponsePostDto editPost(@PathVariable Long id, @RequestBody RequestPostDto requestPostDto){
+        return postService.editPost(id, requestPostDto);
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public String deletePost(@PathVariable Long id, @RequestBody RequestPostDto requestPostDto){
+        return postService.deletePost(id, requestPostDto.getPassword());
     }
 }
