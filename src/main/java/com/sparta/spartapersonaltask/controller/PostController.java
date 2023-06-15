@@ -28,6 +28,7 @@ public class PostController {
         return responsePostDto;
     }
 
+
     @GetMapping("/posts")
     public List<ResponsePostDto> getPost(){
         List<ResponsePostDto> responseDto = postService.findAll().stream()
