@@ -33,7 +33,7 @@ public class PostController {
     @Data
     @AllArgsConstructor
     static class Result<T>{
-        private int count;
+        private int count; // 전체 Post 갯수
         private T data;
     }
 
