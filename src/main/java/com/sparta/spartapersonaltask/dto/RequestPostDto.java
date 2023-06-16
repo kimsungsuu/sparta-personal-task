@@ -1,15 +1,16 @@
 package com.sparta.spartapersonaltask.dto;
 
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-//@Setter
-@AllArgsConstructor
 public class RequestPostDto {
+    @NotNull
     private String title;
+    @NotNull
     private String content;
+    @NotNull
     private String password;
+    @NotNull
     private String author;
 }

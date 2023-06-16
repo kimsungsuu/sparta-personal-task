@@ -51,6 +51,7 @@ public class PostService {
 
         return new ResponsePostDto(post);
     }
+
     @Transactional
     public String deletePost(Long id, String password) {
         Post post = postRepository.findById(id).get();
@@ -60,7 +61,6 @@ public class PostService {
         }else{
             return "게시글 삭제에 실패하였습니다";
         }
-
     }
 
 }

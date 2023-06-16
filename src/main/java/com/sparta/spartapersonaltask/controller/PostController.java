@@ -4,6 +4,7 @@ import com.sparta.spartapersonaltask.dto.RequestPostDto;
 import com.sparta.spartapersonaltask.dto.ResponsePostDto;
 import com.sparta.spartapersonaltask.entity.Post;
 import com.sparta.spartapersonaltask.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,8 +39,8 @@ public class PostController {
         return postService.findById(id);
     }
 
-    @PatchMapping("/posts/{id}")
-    public ResponsePostDto editPost(@PathVariable Long id, @RequestBody RequestPostDto requestPostDto){
+    @PutMapping("/posts/{id}")
+    public ResponsePostDto editPost(@PathVariable Long id, @RequestBody @Valid RequestPostDto requestPostDto){
         return postService.editPost(id, requestPostDto);
     }
 
