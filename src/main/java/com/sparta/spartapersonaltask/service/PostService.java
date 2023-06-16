@@ -19,9 +19,10 @@ public class PostService {
 
     // 게시글 저장
     @Transactional
-    public Long save(Post post) {
+    public ResponsePostDto save(RequestPostDto requestPostDto) {
+        Post post = new Post(requestPostDto);
         postRepository.save(post);
-        return post.getId();
+        return new ResponsePostDto(post);
     }
 
     // 게시글 전체 조회
@@ -62,5 +63,4 @@ public class PostService {
             return "게시글 삭제에 실패하였습니다";
         }
     }
-
 }

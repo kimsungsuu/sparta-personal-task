@@ -20,13 +20,7 @@ public class PostController {
     }
     @PostMapping("/posts")
     public ResponsePostDto savePost(@RequestBody RequestPostDto requestPostDto){
-        Post post = new Post(requestPostDto);
-
-        postService.save(post);
-
-        ResponsePostDto responsePostDto = new ResponsePostDto(post);
-
-        return responsePostDto;
+        return postService.save(requestPostDto);
     }
 
     @GetMapping("/posts")
@@ -39,7 +33,7 @@ public class PostController {
         return postService.findById(id);
     }
 
-    @PutMapping("/posts/{id}")
+    @PatchMapping("/posts/{id}")
     public ResponsePostDto editPost(@PathVariable Long id, @RequestBody @Valid RequestPostDto requestPostDto){
         return postService.editPost(id, requestPostDto);
     }
