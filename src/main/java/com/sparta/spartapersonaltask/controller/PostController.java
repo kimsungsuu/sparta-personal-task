@@ -2,9 +2,10 @@ package com.sparta.spartapersonaltask.controller;
 
 import com.sparta.spartapersonaltask.dto.RequestPostDto;
 import com.sparta.spartapersonaltask.dto.ResponsePostDto;
-import com.sparta.spartapersonaltask.entity.Post;
 import com.sparta.spartapersonaltask.service.PostService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +25,16 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public List<ResponsePostDto> findAllPost(){
-        return postService.findAll();
+    public Result findAllPost(){
+        List<ResponsePostDto> responsePostDtos = postService.findAll();
+        return new Result(responsePostDtos.size(), responsePostDtos);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T>{
+        private int count;
+        private T data;
     }
 
     @GetMapping("/posts/{id}")
